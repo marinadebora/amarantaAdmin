@@ -93,6 +93,5 @@ const CreateCoffe = () => {
   );
 };
 
-CreateCoffe.propTypes = {};
 
 export default CreateCoffe;
