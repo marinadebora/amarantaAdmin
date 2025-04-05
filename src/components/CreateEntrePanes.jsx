@@ -1,18 +1,30 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { FiCoffee } from "react-icons/fi";
+import { LuSandwich } from "react-icons/lu";
 
-const CreateCoffe = () =>
+const CreateEntrePanes = () =>
 {
-  const { register, handleSubmit } = useForm({
+  const [selectSubSection, setSelectSubSection] = useState(null);
+  const { register, handleSubmit, watch } = useForm({
 
     defaultValues: {
       name: '',
       price: '',
       description: '',
       section: "",
+      subSection: ""
     }
   });
+  const section = watch("section")
+
+  useEffect(() =>
+  {
+    if (section === "hamburguesas") {
+      setSelectSubSection(true)
+    } else {
+      setSelectSubSection(null)
+    }
+  }, [section]);
 
   const submitForm = () => { }
 
@@ -23,7 +35,7 @@ const CreateCoffe = () =>
         <div className="bg-[#f9eae6] w-[20rem] rounded-2xl h-full flex flex-col justify-center px-6 py-12 lg:px-8">
           <div className=" rounded-2xl h-[6rem]  flex items-center justify-around gap-1 text-[#769164]">
             <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
-            <p>CAFETERÍA</p><FiCoffee/> 
+            <p>ENTRE PANES</p>  <LuSandwich />
           </div>
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
@@ -54,27 +66,43 @@ const CreateCoffe = () =>
                     autoComplete="current-password"
                     {...register("description")}
                   />
-                  
+
                 </div>
               </div>
 
               <div className="flex items-center justify-between">
-                  <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
-                    Sección
-                  </label>
-                </div>
+                <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
+                  Sección
+                </label>
+              </div>
+
               <select
-
                 className="block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
-                {...register("section", { required: true })}
-              >
-                <option value=''></option>
-                <option className='text-[#4b5d3f]' value='specialty'>Especialidad</option>
-                <option className='text-[#4b5d3f]' value='classics'>Clásicos</option>
-                <option className='text-[#4b5d3f]' value='infusions'>Infusiones</option>
-                <option className='text-[#4b5d3f]' value='cold'>Frio</option>
-              </select>
+                {...register("section", { required: true })}>
 
+                <option value=''></option>
+                <option className='text-[#4b5d3f]' value='sandwiches'>Sandwiches</option>
+                <option className='text-[#4b5d3f]' value='hamburguesas'>Hamburguesas</option>
+              </select>
+              {
+                selectSubSection &&
+                <>
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="subSection" className="block text-sm/6 font-medium text-[#769164]">
+                      Sección
+                    </label>
+                  </div>
+                  <select
+                    className="block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
+                    {...register("subSection", { required: true })}
+                  >
+                    <option value=''></option>
+                    <option className='text-[#4b5d3f]' value='carne'>Carne</option>
+                    <option className='text-[#4b5d3f]' value='pollo'>Pollo</option>
+                    <option className='text-[#4b5d3f]' value='opcional'>Opcional</option>
+                  </select>
+                </>
+              }
               <div>
                 <div className="flex items-center justify-between">
                   <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
@@ -91,7 +119,7 @@ const CreateCoffe = () =>
                   />
                 </div>
               </div>
-                        
+
               <div>
                 <button
                   type="submit"
@@ -110,4 +138,4 @@ const CreateCoffe = () =>
 };
 
 
-export default CreateCoffe;
+export default CreateEntrePanes;

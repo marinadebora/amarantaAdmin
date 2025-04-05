@@ -1,18 +1,31 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
-import { FiCoffee } from "react-icons/fi";
+import { MdFoodBank } from "react-icons/md";
 
-const CreateCoffe = () =>
-{
-  const { register, handleSubmit } = useForm({
+const CreateTapeo = () => {
+  const [selectPicada, setSelectPicada] = useState(null);
+  const [price, setPrice] = useState(null);
+ const { register, handleSubmit, watch} = useForm({
 
     defaultValues: {
       name: '',
-      price: '',
+      price1: '',
+      price2: '',
       description: '',
       section: "",
     }
   });
+const section = watch("section");
+
+useEffect(() => {
+if(section === "picadas"){
+setSelectPicada(true)
+setPrice(true)
+}else{
+  setSelectPicada(null)
+}
+}, [section]);
+
 
   const submitForm = () => { }
 
@@ -20,10 +33,10 @@ const CreateCoffe = () =>
   return (
     <main className='w-full h-[80vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
       <div className='w-full h-[95vh] flex items-center justify-center'>
-        <div className="bg-[#f9eae6] w-[20rem] rounded-2xl h-full flex flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="mt-[10rem] bg-[#f9eae6] w-[20rem] rounded-2xl h-lvh flex flex-col justify-center px-6 py-12 lg:px-8">
           <div className=" rounded-2xl h-[6rem]  flex items-center justify-around gap-1 text-[#769164]">
             <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
-            <p>CAFETERÍA</p><FiCoffee/> 
+            <p>Tapeo</p><MdFoodBank /> 
           </div>
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
@@ -69,28 +82,82 @@ const CreateCoffe = () =>
                 {...register("section", { required: true })}
               >
                 <option value=''></option>
-                <option className='text-[#4b5d3f]' value='specialty'>Especialidad</option>
-                <option className='text-[#4b5d3f]' value='classics'>Clásicos</option>
-                <option className='text-[#4b5d3f]' value='infusions'>Infusiones</option>
-                <option className='text-[#4b5d3f]' value='cold'>Frio</option>
+                <option className='text-[#4b5d3f]' value='picadas'>Picadas</option>
+                <option className='text-[#4b5d3f]' value='tapeo'>Tapeo</option>
               </select>
+              {
+                selectPicada &&
+                <>
+                 <div className="flex items-center justify-between">
+                  <label htmlFor="subSection" className="block text-sm/6 font-medium text-[#769164]">
+                    Tipo de Picada
+                  </label>
+                </div>
+              <select
 
+                className="block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
+                {...register("subSection", { required: true })}
+              >
+                <option value=''></option>
+                <option className='text-[#4b5d3f]' value='hot'>Picada Caliente</option>
+                <option className='text-[#4b5d3f]' value='classics'>Picada Clasica</option>
+              </select></>
+              }
+              {
+                price ?
+                <>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                    Precio Para 2
+                    </label>
+                  </div>
+
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      autoComplete="current-password"
+                      {...register("price1", { required: true })}
+                      required
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <div className="flex items-center justify-between">
+                    <label htmlFor="price2" className="block text-sm/6 font-medium text-[#769164]">
+                      Precio Para 4
+                    </label>
+                  </div>
+
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      autoComplete="current-password"
+                      {...register("price2", { required: true })}
+                      required
+
+                    />
+                  </div>
+                </div></>
+              :
               <div>
                 <div className="flex items-center justify-between">
-                  <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
+                  <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
                     Precio
                   </label>
-
                 </div>
+
                 <div className="mt-2">
                   <input
                     className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    {...register("price", { required: true })}
+                    autoComplete="current-password"
+                    {...register("price1", { required: true })}
                     required
-
                   />
                 </div>
               </div>
+          }
                         
               <div>
                 <button
@@ -110,4 +177,4 @@ const CreateCoffe = () =>
 };
 
 
-export default CreateCoffe;
+export default CreateTapeo;
