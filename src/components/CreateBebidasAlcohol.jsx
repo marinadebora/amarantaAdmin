@@ -44,10 +44,10 @@ const CreateBebidasAlcohol = () => {
     };
 
   return (
-    <main className='w-full h-[80vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
-    <div className='w-full h-full md:h-dvh md:py-2 flex items-center justify-center'>
-      <div className="bg-[#f9eae6] w-[20rem] rounded-2xl h-full md:py-2  flex flex-col justify-around px-6 lg:px-8">
-      <div className="rounded-2xl h-[6rem]  flex items-center justify-around gap-1 text-[#769164]">
+    <main className='w-full h-[85vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
+    <div className='w-full h-full md:h-dvh md:py-2 flex items-start justify-center'>
+      <div className="bg-[#f9eae6] w-[80%] md:w-[20rem] rounded-2xl py-4 px-6 lg:px-8">
+      <div className="rounded-2xl h-[6rem] flex items-center justify-around gap-1 text-[#769164]">
       <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
       <p className='w-[8rem]'>BEBIDAS CON ALCOHOL</p> <BiDrink />
         </div>
@@ -83,7 +83,7 @@ const CreateBebidasAlcohol = () => {
               </div>
             </div>
 
-            <div className='flex items-center justify-around border'>
+            <div className='flex items-center justify-around'>
             <div className="flex items-center justify-between w-[35%]">
               <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
                 Sección
@@ -102,8 +102,8 @@ const CreateBebidasAlcohol = () => {
             </div>
           {
               selectBodega&&
-              <div className='flex items-center justify-around border'>
-                  <div className="w-[60%]">
+              <div className='flex items-center justify-around'>
+                  <div className="">
                     <label htmlFor="bodega" className="block text-sm/6 font-medium text-[#769164]">
                       Bodega
                     </label>
@@ -111,7 +111,7 @@ const CreateBebidasAlcohol = () => {
 
                   <div className="">
                     <input
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="block w-full rounded-md bg-white px-2 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       {...register("bodega", { required: true })}
                       required
                     />
@@ -146,7 +146,7 @@ const CreateBebidasAlcohol = () => {
 
                     <div className="">
                       <input
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                        className="block w-full rounded-md bg-white px-2 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         {...register("price2", { required: true })}
                         required
 
@@ -155,21 +155,22 @@ const CreateBebidasAlcohol = () => {
                   </div>
                   </div>
                 :
-                <div className='flex items-center justify-around'>
-                  <div className="flex items-center justify-between">
-                    <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
-                      Precio
-                    </label>
-                  </div>
+                <div>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                        Precio
+                      </label>
+                    </div>
 
-                  <div className="">
-                    <input
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                      {...register("price1", { required: true })}
-                      required
-                    />
+                    <div className="mt-2">
+                      <input
+                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                        autoComplete="current-password"
+                        {...register("price1", { required: true })}
+                        required
+                      />
+                    </div>
                   </div>
-                </div>
             }
             <div>
               <button

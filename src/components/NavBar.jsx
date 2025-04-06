@@ -25,16 +25,16 @@ function NavBar() {
   
             <div className={`transition-transform transform z-50  ${isOpenCreate ? 'translate-x-0 translate-y-0' : 'hidden'}`}>{/* -translate-x-full */}
               <ul className="bg-[#f9eae6] inset-y- md:inset-y-10  h-full shadow-xl flex flex-col gap-2 rounded-sm p-2">
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><FiCoffee/><p className="text-xs md:text-sm">Cafeteria</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><RiCake3Line/><p className="text-xs md:text-sm">Pastelería</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><MdFoodBank /><p className="text-xs md:text-sm">Tapeo</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><LuPizza /><p className="text-xs md:text-sm">Pizzas Tartas y Empanadas</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><LuSandwich /><p className="text-xs md:text-sm">Entre Panes</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2 "><LuSalad /><p className="text-xs md:text-sm">Ensaladas y Guarniciones</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><GiMeal /><p className="text-xs md:text-sm">Al Plato</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><LuIceCreamBowl /><p className="text-xs md:text-sm">Postres</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><RiDrinks2Fill /><p className="text-xs md:text-sm">Bebidas</p></a></li>
-                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a className="flex items-center gap-2"><BiDrink /><p className="text-xs md:text-sm">Con Alcohol</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createCoffe" className="flex items-center gap-2"><FiCoffee/><p className="text-xs md:text-sm">Cafeteria</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createPasteleria" className="flex items-center gap-2"><RiCake3Line/><p className="text-xs md:text-sm">Pastelería</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createTapeo" className="flex items-center gap-2"><MdFoodBank /><p className="text-xs md:text-sm">Tapeo</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createPizzTarEmp" className="flex items-center gap-2"><LuPizza /><p className="text-xs md:text-sm">Pizzas Tartas y Empanadas</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createEntreP" className="flex items-center gap-2"><LuSandwich /><p className="text-xs md:text-sm">Entre Panes</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createEnsGuar" className="flex items-center gap-2 "><LuSalad /><p className="text-xs md:text-sm">Ensaladas y Guarniciones</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createAlPlato" className="flex items-center gap-2"><GiMeal /><p className="text-xs md:text-sm">Al Plato</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createPostres" className="flex items-center gap-2"><LuIceCreamBowl /><p className="text-xs md:text-sm">Postres</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createBebidas" className="flex items-center gap-2"><RiDrinks2Fill /><p className="text-xs md:text-sm">Bebidas</p></a></li>
+                <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/createBebidasA" className="flex items-center gap-2"><BiDrink /><p className="text-xs md:text-sm">Con Alcohol</p></a></li>
               </ul>
             </div>
           </div>

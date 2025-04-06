@@ -13,6 +13,7 @@ import CreateEntrePanes from './components/CreateEntrePanes';
 import CreatePasteleria from './components/CreatePasteleria';
 import CreatePostres from './components/CreatePostres';
 import CreateTapeo from './components/CreateTapeo';
+import CreatePizzaTartasEmpanadas from './components/CreatePizzaTartasEmpanadas';
 
 
 function App()
@@ -48,7 +49,7 @@ function App()
               <Route path='/createEnsGuar' element={<CreateEnsaladasGuarniciones />} />
               <Route path='/createEntreP' element={<CreateEntrePanes />} />
               <Route path='/createPasteleria' element={<CreatePasteleria />} />
-              <Route path='/createPizzTarEmp' element={<CreatePasteleria />} />
+              <Route path='/createPizzTarEmp' element={<CreatePizzaTartasEmpanadas />} />
               <Route path='/createPostres' element={<CreatePostres />} />
               <Route path='/createTapeo' element={<CreateTapeo />} />
             </Routes>

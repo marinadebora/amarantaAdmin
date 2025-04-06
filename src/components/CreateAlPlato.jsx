@@ -1,24 +1,33 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { GiMeal } from "react-icons/gi";
+import {postAlPlato} from "../redux/thunks/alPlato";
+
 
 const CreateAlPlato = () => {
-   const { register, handleSubmit } = useForm({
-  
+  const dispatch = useDispatch(); 
+
+   const { register, handleSubmit, reset } = useForm({
       defaultValues: {
         name: '',
         price: '',
         description: '',
         section: "",
       }
-    });
-  
-    const submitForm = () => { }
+    }); 
+
+    const submitForm = (values) => {
+      console.log(values)
+      dispatch(postAlPlato(values))
+      reset()
+     }
+
   return (
-    <main className='w-full h-[80vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
-    <div className='w-full h-full md:h-dvh md:py-2 flex items-center justify-center'>
-      <div className="bg-[#f9eae6] w-[20rem] rounded-2xl h-full md:py-2  flex flex-col justify-around px-6 lg:px-8">
-      <div className="rounded-2xl h-[6rem]  flex items-center justify-around gap-1 text-[#769164]">
+    <main className='w-full h-[85vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
+    <div className='w-full h-full md:h-dvh md:py-2 flex items-start justify-center'>
+      <div className="bg-[#f9eae6] w-[80%] md:w-[20rem] rounded-2xl py-4 px-6 lg:px-8">
+      <div className="rounded-2xl h-[6rem] flex items-center justify-around gap-1 text-[#769164]">
       <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
           <p>AL PLATO</p><GiMeal />
         </div>
@@ -78,7 +87,7 @@ const CreateAlPlato = () => {
               <div className="mt-2">
                 <input
                   className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                  autoComplete="current-password"
+                  type="number"
                   {...register("price", { required: true })}
                   required
 

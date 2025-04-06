@@ -30,10 +30,10 @@ const CreateEntrePanes = () =>
 
 
   return (
-    <main className='w-full h-[80vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
-      <div className='w-full h-[95vh] flex items-center justify-center'>
-        <div className="bg-[#f9eae6] w-[20rem] rounded-2xl h-full flex flex-col justify-center px-6 py-12 lg:px-8">
-          <div className=" rounded-2xl h-[6rem]  flex items-center justify-around gap-1 text-[#769164]">
+    <main className='w-full h-[85vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
+    <div className='w-full h-full md:h-dvh md:py-2 flex items-start justify-center mt-2'>
+      <div className="bg-[#f9eae6] w-[80%] md:w-[20rem] rounded-2xl py-4 px-6 lg:px-8">
+      <div className="rounded-2xl h-[6rem] flex items-center justify-around gap-1 text-[#769164]">
             <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
             <p>ENTRE PANES</p>  <LuSandwich />
           </div>
@@ -86,14 +86,14 @@ const CreateEntrePanes = () =>
               </select>
               {
                 selectSubSection &&
-                <>
-                  <div className="flex items-center justify-between">
+                <div className='ml-2 flex items-center justify-end'>
+                  <div className="w-[40%]">
                     <label htmlFor="subSection" className="block text-sm/6 font-medium text-[#769164]">
-                      Sección
+                      Sub Sección
                     </label>
                   </div>
                   <select
-                    className="block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
+                    className="block w-[60%] rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
                     {...register("subSection", { required: true })}
                   >
                     <option value=''></option>
@@ -101,24 +101,24 @@ const CreateEntrePanes = () =>
                     <option className='text-[#4b5d3f]' value='pollo'>Pollo</option>
                     <option className='text-[#4b5d3f]' value='opcional'>Opcional</option>
                   </select>
-                </>
+                </div >
               }
-              <div>
-                <div className="flex items-center justify-between">
-                  <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
-                    Precio
-                  </label>
+             <div>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                        Precio
+                      </label>
+                    </div>
 
-                </div>
-                <div className="mt-2">
-                  <input
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    {...register("price", { required: true })}
-                    required
-
-                  />
-                </div>
-              </div>
+                    <div className="mt-2">
+                      <input
+                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                        autoComplete="current-password"
+                        {...register("price1", { required: true })}
+                        required
+                      />
+                    </div>
+                  </div>
 
               <div>
                 <button

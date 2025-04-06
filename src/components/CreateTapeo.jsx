@@ -23,6 +23,7 @@ setSelectPicada(true)
 setPrice(true)
 }else{
   setSelectPicada(null)
+  setPrice(null)
 }
 }, [section]);
 
@@ -31,10 +32,10 @@ setPrice(true)
 
 
   return (
-    <main className='w-full h-[80vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
-      <div className='w-full h-[95vh] flex items-center justify-center'>
-        <div className="mt-[10rem] bg-[#f9eae6] w-[20rem] rounded-2xl h-lvh flex flex-col justify-center px-6 py-12 lg:px-8">
-          <div className=" rounded-2xl h-[6rem]  flex items-center justify-around gap-1 text-[#769164]">
+    <main className='w-full h-[85vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
+    <div className='w-full h-full md:h-dvh md:py-2 flex items-start justify-center md:mt-[5.5rem]'>
+      <div className="bg-[#f9eae6] w-[80%] md:w-[20rem] rounded-2xl py-4 px-6 lg:px-8">
+      <div className="rounded-2xl h-[6rem] flex items-center justify-around gap-1 text-[#769164]">
             <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
             <p>Tapeo</p><MdFoodBank /> 
           </div>

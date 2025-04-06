@@ -1,4 +1,4 @@
-import alPlato from './alPlato';
+//import alPlato from './alPlato';
 /* import bebidas from './bebidas';
 import bebidasAlcohol from './bebidasAlcohol';
 import cafeteria from './cafeteria';
@@ -10,7 +10,7 @@ import postres from './postres';
 import tapeo from './tapeo'; */
 
 export default {
-  alPlato,
+/*   alPlato, */
 /*   bebidas,
   bebidasAlcohol,
   cafeteria,
