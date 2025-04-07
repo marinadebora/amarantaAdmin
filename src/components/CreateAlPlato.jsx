@@ -2,7 +2,8 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
 import { GiMeal } from "react-icons/gi";
-import {postAlPlato} from "../redux/thunks/alPlato";
+//import {postAlPlato} from "../redux/thunks/alPlato";
+import { postProduct } from '../redux/thunks';
 
 
 const CreateAlPlato = () => {
@@ -18,8 +19,11 @@ const CreateAlPlato = () => {
     }); 
 
     const submitForm = (values) => {
-      console.log(values)
-      dispatch(postAlPlato(values))
+      const data ={
+        collection:"alPlato",
+        values
+      }
+      dispatch(postProduct(data))
       reset()
      }
 

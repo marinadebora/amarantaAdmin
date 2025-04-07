@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { LuSandwich } from "react-icons/lu";
+import { useDispatch } from 'react-redux';
+import { postProduct } from '../redux/thunks';
 
 const CreateEntrePanes = () =>
 {
   const [selectSubSection, setSelectSubSection] = useState(null);
-  const { register, handleSubmit, watch } = useForm({
-
+  const dispatch = useDispatch();
+  const { register, handleSubmit, watch, reset } = useForm({
     defaultValues: {
       name: '',
       price: '',
@@ -26,7 +28,15 @@ const CreateEntrePanes = () =>
     }
   }, [section]);
 
-  const submitForm = () => { }
+     const submitForm = (values) =>
+       {
+         const data = {
+           collection: "entrePanes",
+           values
+         }
+         dispatch(postProduct(data))
+         reset()
+       };
 
 
   return (

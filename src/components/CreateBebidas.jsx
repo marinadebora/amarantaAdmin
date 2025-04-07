@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { RiDrinks2Fill } from "react-icons/ri";
+import { postProduct } from '../redux/thunks';
+import { useDispatch } from 'react-redux';
 
 const CreateBebidas = () =>
 {
   const [type, setType] = useState(null);
-  const { register, watch, handleSubmit } = useForm({
+  const dispatch = useDispatch()
+  const { register, watch, handleSubmit,reset } = useForm({
 
     defaultValues: {
       name: '',
@@ -25,7 +28,14 @@ const CreateBebidas = () =>
     }
   }, [typeSection]);
 
-  const submitForm = data => console.log(data);
+  const submitForm = (values) =>{
+       const data ={
+            collection:"bebidas",
+            values
+          }
+          dispatch(postProduct(data))
+          reset()
+  }
 
   return (
     <main className='w-full h-[85vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>

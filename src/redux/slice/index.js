@@ -6,26 +6,26 @@ const initialState = {
   errors:""
 };
 
-export const al_plato_slice = createSlice({
-  name:'al_plato_slice',
+export const products_slice = createSlice({
+  name:'products_slice',
   initialState,
   reducers:{
-    get_alPlato:(state,action)=>{
+    get_products:(state,action)=>{
       state.data = action.payload.data
     },
-    post_alPlato:(state,action)=>{
+    post_products:(state,action)=>{
       state.data = action.payload.data,
       state.status = action.payload.status
     },
-    put_alPlato:(state,action)=>{
+    put_products:(state,action)=>{
       state.data = action.payload.data,
       state.status = action.payload.status
     },
-    error_alPlato:(state,action)=>{
+    error_products:(state,action)=>{
       state.data = action.payload.data,
       state.status = action.payload.status
     }
   }
 });
-export const { get_alPlato, post_alPlato, put_alPlato, error_alPlato }= al_plato_slice.actions;
-export default al_plato_slice.reducer
+export const { get_products, post_products, put_products, error_products }= products_slice.actions;
+export default products_slice.reducer

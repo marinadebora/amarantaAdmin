@@ -1,10 +1,12 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { LuSalad } from "react-icons/lu";
+import { postProduct } from '../redux/thunks';
+import { useDispatch } from 'react-redux';
 
 const CreateEnsaladasGuarniciones = () => {
-   const { register, handleSubmit } = useForm({
-  
+  const dispatch = useDispatch();
+   const { register, handleSubmit, reset } = useForm({
       defaultValues: {
         name: '',
         price: '',
@@ -13,7 +15,15 @@ const CreateEnsaladasGuarniciones = () => {
       }
     });
 
-    const submitForm = () => { }
+    const submitForm = (values) =>
+     {
+       const data = {
+         collection: "ensaladasGuarniciones",
+         values
+       }
+       dispatch(postProduct(data))
+       reset()
+     };
 
 
   return (
