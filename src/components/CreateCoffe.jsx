@@ -2,7 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import { FiCoffee } from "react-icons/fi";
 import { useDispatch } from 'react-redux';
-import { postProduct } from '../redux/thunks';
+import { postProduct } from '../redux/thunks/products';
 
 const CreateCoffe = () =>
 {

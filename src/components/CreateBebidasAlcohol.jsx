@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { BiDrink } from "react-icons/bi";
 import { useDispatch } from 'react-redux';
-import { postProduct } from '../redux/thunks';
+import { postProduct } from '../redux/thunks/products';
 /* 
 ver la forma de que tome el value de bodega */
 
@@ -10,6 +10,7 @@ ver la forma de que tome el value de bodega */
 const CreateBebidasAlcohol = () =>
 {
   const [type, setType] = useState(null);
+  const [button, setButton] = useState(null);
   const [selectBodega, setSelectBodega] = useState(null);
   const dispatch = useDispatch();
   const { register, watch, handleSubmit, reset } = useForm({
@@ -23,7 +24,8 @@ const CreateBebidasAlcohol = () =>
     }
   });
   const typeSection = watch("section")
-
+  const price1 = watch("price1")
+  const price2 = watch("price2")
   useEffect(() =>
   {
 
@@ -37,9 +39,13 @@ const CreateBebidasAlcohol = () =>
     } else {
       setSelectBodega(null)
     }
+if(type && price1 || price2){
+  setButton(true)
+}else{
+  setButton(null)
+}
 
-
-  }, [typeSection]);
+  }, [price1, price2, type, typeSection]);
 
 
   const submitForm = (values) =>
@@ -140,8 +146,7 @@ const CreateBebidasAlcohol = () =>
                       <div className="">
                         <input
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                          {...register("price1", { required: true })}
-                          required
+                          {...register("price1")}
                         />
                       </div>
                     </div>
@@ -156,8 +161,7 @@ const CreateBebidasAlcohol = () =>
                       <div className="">
                         <input
                           className="block w-full rounded-md bg-white px-2 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                          {...register("price2", { required: true })}
-                          required
+                          {...register("price2")}
 
                         />
                       </div>
@@ -182,12 +186,25 @@ const CreateBebidasAlcohol = () =>
                   </div>
               }
               <div>
-                <button
+                {
+                  button ?
+                  <button
                   type="submit"
                   className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-[#4b5d3f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                 >
                   Crear
                 </button>
+
+                : /* ver si funciona el boton */
+                <button
+                type="submit"
+                disabled
+                className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-[#4b5d3f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Crear
+              </button>
+                }
+              
               </div>
             </form>
 

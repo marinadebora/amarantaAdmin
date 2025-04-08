@@ -1,6 +1,6 @@
 import { collection, getDocs,addDoc } from "firebase/firestore"
 import { db } from "../../firebase/config";
-import { error_products, get_products, post_products } from "../slice";
+import { error_products, get_products, post_products } from "../slice/products_slice";
 
 //thunks que sirve para traer las distintas colecciones ya que recibe por payload el nombre de dicha coleccion
 

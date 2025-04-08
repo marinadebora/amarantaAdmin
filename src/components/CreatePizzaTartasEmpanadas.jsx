@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { LuPizza } from "react-icons/lu";
-import { postProduct } from '../redux/thunks';
+import { postProduct } from '../redux/thunks/products';
 import { useDispatch } from 'react-redux';
 
 const CreatePizzaTartasEmpanadas = () =>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
 import { LuSalad } from "react-icons/lu";
-import { postProduct } from '../redux/thunks';
+import { postProduct } from '../redux/thunks/products';
 import { useDispatch } from 'react-redux';
 
 const CreateEnsaladasGuarniciones = () => {

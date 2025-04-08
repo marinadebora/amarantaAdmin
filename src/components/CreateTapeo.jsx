@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { MdFoodBank } from "react-icons/md";
 import { useDispatch } from 'react-redux';
-import { postProduct } from '../redux/thunks';
+import { postProduct } from '../redux/thunks/products';
 
 const CreateTapeo = () =>
 {
@@ -54,35 +54,6 @@ const CreateTapeo = () =>
           <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
             <form onSubmit={handleSubmit(submitForm)} className="space-y-3">
-              <div>
-                <label htmlFor="name" className="block text-sm/6 font-medium text-[#769164]">
-                  Nombre
-                </label>
-                <div className="mt-2">
-                  <input
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    {...register("name", { required: true })}
-                    required
-                  />
-                </div>
-              </div>
-
-              <div>
-                <div className="flex items-center justify-between">
-                  <label htmlFor="description" className="block text-sm/6 font-medium text-[#769164]">
-                    Descripcion
-                  </label>
-                </div>
-
-                <div className="mt-2">
-                  <input
-                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    autoComplete="current-password"
-                    {...register("description")}
-                  />
-
-                </div>
-              </div>
 
               <div className="flex items-center justify-between">
                 <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
@@ -99,7 +70,7 @@ const CreateTapeo = () =>
                 <option className='text-[#4b5d3f]' value='tapeo'>Tapeo</option>
               </select>
               {
-                selectPicada &&
+                selectPicada ?
                 <>
                   <div className="flex items-center justify-between">
                     <label htmlFor="subSection" className="block text-sm/6 font-medium text-[#769164]">
@@ -115,7 +86,36 @@ const CreateTapeo = () =>
                     <option className='text-[#4b5d3f]' value='hot'>Picada Caliente</option>
                     <option className='text-[#4b5d3f]' value='classics'>Picada Clasica</option>
                   </select></>
+                  :
+                  <div>
+                  <label htmlFor="name" className="block text-sm/6 font-medium text-[#769164]">
+                    Nombre
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      {...register("name", { required: true })}
+                      required
+                    />
+                  </div>
+                </div> 
               }
+               <div>
+                <div className="flex items-center justify-between">
+                  <label htmlFor="description" className="block text-sm/6 font-medium text-[#769164]">
+                    Descripcion
+                  </label>
+                </div>
+
+                <div className="mt-2">
+                  <input
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    autoComplete="current-password"
+                    {...register("description")}
+                  />
+
+                </div>
+              </div>
               {
                 price ?
                   <>

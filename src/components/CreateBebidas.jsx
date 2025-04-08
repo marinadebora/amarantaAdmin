@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { RiDrinks2Fill } from "react-icons/ri";
-import { postProduct } from '../redux/thunks';
+import { postProduct } from '../redux/thunks/products';
 import { useDispatch } from 'react-redux';
 
 const CreateBebidas = () =>
 {
   const [type, setType] = useState(null);
+  const [typeGaseosa, setTypeGaseosa] = useState(null);
   const dispatch = useDispatch()
   const { register, watch, handleSubmit,reset } = useForm({
 
@@ -24,7 +25,12 @@ const CreateBebidas = () =>
     if (typeSection === "jugos") {
       setType(true)
     } else {
-      setType(false)
+      setType(null)
+    }
+    if(typeSection === "refrescos"){
+setTypeGaseosa(true)
+    }else{
+      setTypeGaseosa(null)
     }
   }, [typeSection]);
 
@@ -131,6 +137,45 @@ const CreateBebidas = () =>
                       </div>
                     </div>
                     </div>
+                  :
+                  typeGaseosa ?
+                  <div className='flex items-center justify-around gap-1'>
+                  <div className='w-[40%]'>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                        Precio 500 cc
+                      </label>
+                    </div>
+
+                    <div className="">
+                      <input
+                        className="block w-full rounded-md bg-white px-3 py-1 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                        autoComplete="current-password"
+                        {...register("price1", { required: true })}
+                        required
+                      />
+                    </div>
+                  </div>
+
+                  <div className='w-[40%]'>
+                    <div className="flex items-center justify-between">
+                      <label htmlFor="price2" className="block text-sm/6 font-medium text-[#769164]">
+                        Precio 1.5 L
+
+                      </label>
+                    </div>
+
+                    <div className="">
+                      <input
+                        className="block w-full rounded-md bg-white px-3 py-1 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                        autoComplete="current-password"
+                        {...register("price2", { required: true })}
+                        required
+
+                      />
+                    </div>
+                  </div>
+                  </div>
                   :
                   <div>
                     <div className="flex items-center justify-between">
