@@ -39,7 +39,7 @@ const CreateBebidasAlcohol = () =>
     } else {
       setSelectBodega(null)
     }
-if(type && price1 || price2){
+if(price1 || price2){
   setButton(true)
 }else{
   setButton(null)
@@ -60,8 +60,8 @@ if(type && price1 || price2){
 
   return (
     <main className='w-full h-[85vh] flex flex-col items-center justify-center p-12 max-md:p-2 overflow-y-scroll'>
-      <div className='w-full h-full md:h-dvh md:py-2 flex items-start justify-center'>
-        <div className="bg-[#f9eae6] w-[80%] md:w-[20rem] rounded-2xl py-4 px-6 lg:px-8">
+      <div className='w-full h-full md:h-dvh md:py-2 flex items-start justify-center md:mt-[5.5rem]'>
+         <div className="bg-[#f9eae6] w-[80%] md:w-[20rem] rounded-2xl py-4 px-6 lg:px-8">
           <div className="rounded-2xl h-[6rem] flex items-center justify-around gap-1 text-[#769164]">
             <img className='w-[6rem]' src="/amarantaLogo.svg" alt="" />
             <p className='w-[8rem]'>BEBIDAS CON ALCOHOL</p> <BiDrink />
@@ -98,40 +98,40 @@ if(type && price1 || price2){
                 </div>
               </div>
 
-              <div className='flex items-center justify-around'>
-                <div className="flex items-center justify-between w-[35%]">
-                  <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
-                    Sección
-                  </label>
-                </div>
-
-                <select
-                  className="w-[60%] block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
-                  {...register("section", { required: true })}
-                >
-                  <option value=''></option>
-                  <option className='text-[#4b5d3f]' value='vinos'>Vinos</option>
-                  <option className='text-[#4b5d3f]' value='cervezas'>Cervezas</option>
-                  <option className='text-[#4b5d3f]' value='tragos y aperitivos'>Tragos y Aperitivos</option>
-                </select>
+              <div className="flex items-center justify-between">
+                <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
+                  Sección
+                </label>
               </div>
+              <select
+
+                className="block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
+                {...register("section", { required: true })}
+              >
+                <option value=''></option>
+                <option className='text-[#4b5d3f]' value='vinos'>Vinos</option>
+                <option className='text-[#4b5d3f]' value='cervezas'>Cervezas</option>
+                <option className='text-[#4b5d3f]' value='tragos y aperitivos'>Tragos y Aperitivos</option>
+              </select>
+
               {
                 selectBodega &&
-                <div className='flex items-center justify-around'>
-                  <div className="">
-                    <label htmlFor="bodega" className="block text-sm/6 font-medium text-[#769164]">
-                      Bodega
-                    </label>
-                  </div>
+               <>
+               <div className="flex items-center justify-between">
+                <label htmlFor="section" className="block text-sm/6 font-medium text-[#769164]">
+                  Bodega
+                </label>
+              </div>
+              <select
 
-                  <div className="">
-                    <input
-                      className="block w-full rounded-md bg-white px-2 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                      {...register("bodega", { required: true })}
-                      required
-                    />
-                  </div>
-                </div>
+                className="block w-full rounded-md  px-3 py-2.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 text-xs"
+                {...register("bodega", { required: true })}
+              >
+                <option value=''></option>
+                <option className='text-[#4b5d3f]' value='vinos de potrero'>Vinos de Potrero</option>
+                <option className='text-[#4b5d3f]' value=' '>Otra</option>
+              </select>
+              </>
               }
               {
                 type ?
