@@ -12,7 +12,7 @@ const CreateTapeo = () =>
   const { register, handleSubmit, watch, reset } = useForm({
     defaultValues: {
       name: '',
-      price1: '',
+      price: '',
       price2: '',
       description: '',
       section: "",
@@ -121,7 +121,7 @@ const CreateTapeo = () =>
                   <>
                     <div>
                       <div className="flex items-center justify-between">
-                        <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                        <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
                           Precio Para 2
                         </label>
                       </div>
@@ -130,7 +130,7 @@ const CreateTapeo = () =>
                         <input
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                           autoComplete="current-password"
-                          {...register("price1", { required: true })}
+                          {...register("price", { required: true })}
                           required
                         />
                       </div>
@@ -156,7 +156,7 @@ const CreateTapeo = () =>
                   :
                   <div>
                     <div className="flex items-center justify-between">
-                      <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                      <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
                         Precio
                       </label>
                     </div>
@@ -165,7 +165,7 @@ const CreateTapeo = () =>
                       <input
                         className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                         autoComplete="current-password"
-                        {...register("price1", { required: true })}
+                        {...register("price", { required: true })}
                         required
                       />
                     </div>

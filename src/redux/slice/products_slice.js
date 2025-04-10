@@ -11,7 +11,7 @@ export const products_slice = createSlice({
   initialState,
   reducers:{
     get_products:(state,action)=>{
-      state.data = action.payload.data
+      state.data = action.payload
     },
     post_products:(state,action)=>{
       state.data = action.payload.data,

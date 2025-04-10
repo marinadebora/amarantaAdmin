@@ -16,7 +16,7 @@ const CreateBebidasAlcohol = () =>
   const { register, watch, handleSubmit, reset } = useForm({
     defaultValues: {
       name: '',
-      price1: '',
+      price: '',
       price2: '',
       description: '',
       section: "",
@@ -138,7 +138,7 @@ if(price1 || price2){
                   <div className='flex items-center justify-around gap-1'>
                     <div className='w-[40%]'>
                       <div className="flex items-center justify-between">
-                        <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                        <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
                           Precio Botella
                         </label>
                       </div>
@@ -146,7 +146,7 @@ if(price1 || price2){
                       <div className="">
                         <input
                           className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                          {...register("price1")}
+                          {...register("price")}
                         />
                       </div>
                     </div>

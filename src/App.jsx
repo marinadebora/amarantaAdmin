@@ -14,7 +14,10 @@ import CreatePasteleria from './components/CreatePasteleria';
 import CreatePostres from './components/CreatePostres';
 import CreateTapeo from './components/CreateTapeo';
 import CreatePizzaTartasEmpanadas from './components/CreatePizzaTartasEmpanadas';
-
+import PanelEditProduct from './components/PanelEditProduct';
+import EditProducts from './components/EditProducts';
+import Footer from './components/Footer'
+import PanelCreateProduct from './components/PanelCreateProduct';
 
 function App()
 {
@@ -45,24 +48,22 @@ function App()
               <Route path='/createAlPlato' element={<CreateAlPlato />} />
               <Route path='/createBebidas' element={<CreateBebidas />} />
               <Route path='/createBebidasA' element={<CreateBebidasAlcohol />} />
-              <Route path='/createCoffe' element={<CreateCoffe />} />
+              <Route path='/createCafeteria' element={<CreateCoffe />} />
               <Route path='/createEnsGuar' element={<CreateEnsaladasGuarniciones />} />
               <Route path='/createEntreP' element={<CreateEntrePanes />} />
               <Route path='/createPasteleria' element={<CreatePasteleria />} />
               <Route path='/createPizzTarEmp' element={<CreatePizzaTartasEmpanadas />} />
               <Route path='/createPostres' element={<CreatePostres />} />
               <Route path='/createTapeo' element={<CreateTapeo />} />
+              <Route path='/panelEdit' element={<PanelEditProduct />} />
+              <Route path='/editProduct/:id' element={<EditProducts />} />
             </Routes>
           </>
       }
 
 
 
-
-
-      <footer className="bg-[#000] text-white ">
-        fffff
-      </footer>
+<Footer />
     </div>
   );
 }

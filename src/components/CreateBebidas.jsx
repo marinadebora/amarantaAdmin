@@ -13,7 +13,7 @@ const CreateBebidas = () =>
 
     defaultValues: {
       name: '',
-      price1: '',
+      price: '',
       price2: '',
       description: '',
       section: "",
@@ -104,7 +104,7 @@ setTypeGaseosa(true)
                   <div className='flex items-center justify-around gap-1'>
                     <div className='w-[40%]'>
                       <div className="flex items-center justify-between">
-                        <label htmlFor="price1" className="block text-sm/6 font-medium text-[#769164]">
+                        <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
                           Precio Jarra
                         </label>
                       </div>
@@ -113,7 +113,7 @@ setTypeGaseosa(true)
                         <input
                           className="block w-full rounded-md bg-white px-3 py-1 text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                           autoComplete="current-password"
-                          {...register("price1", { required: true })}
+                          {...register("price", { required: true })}
                           required
                         />
                       </div>
