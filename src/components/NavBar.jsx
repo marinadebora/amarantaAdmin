@@ -9,6 +9,7 @@ import { MdFoodBank } from "react-icons/md";
 import { FiCoffee } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../redux/thunks/products";
+import { clean_product_id } from "../redux/slice/productId_slice";
 
 function NavBar() {
   const [isOpenCreate, setIsOpenCreate] = useState(false);
@@ -18,22 +19,23 @@ const navigate = useNavigate()
 
 
 const handleEdit = (value)=>{
+  dispatch(clean_product_id())
   dispatch(getProducts(value))
-  navigate('/panelEdit')
+  navigate(`/panelEdit/${value}`)
   setIsOpeEdit(!isOpenEdit)
 }
   return (
   
       <nav className='w-full bg-[#f9eae6] flex items-center justify-center'>
         <div className=' w-full h-[4rem] md:h-[5rem] flex items-center justify-between gap-2'>
-          <div className=" md:w-[12rem]"><img className='w-[4rem] ml-2' src="/amarantaLogo.svg" alt="" /></div>
+          <div className=" md:w-[12rem]"><img className='w-[5rem] ml-2' src="/amarantaLogo.svg" alt="amaranta Logo" /></div>
 
             <div className="w-[12rem] h-[2rem] flex flex-col pt-2 ">
           
-              <button onClick={() => setIsOpenCreate(!isOpenCreate)} className="text-[0.7rem] md:text-sm text-[#769164] hover:text-[#4a5b3f] cursor-pointer">Crear Productos</button>
+              <button onClick={() => setIsOpenCreate(!isOpenCreate)} className="text-[0.7rem] md:text-lg text-[#769164] hover:text-[#4a5b3f] cursor-pointer">Crear Productos</button>
             
   
-            <div className={`z-50  ${isOpenCreate ? 'visible' : 'hidden'}`}>{/* -translate-x-full */}
+            <div className={`z-50  ${isOpenCreate ? 'visible' : 'hidden'}`}>
               <ul className="bg-[#f9eae6] mt-6 md:mt-8 w-full h-full shadow-xl flex flex-col gap-2 rounded-sm p-2">
                 <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/cafeteria" className="flex items-center text-[0.6rem] md:text-sm gap-2"><FiCoffee/>Cafeteria</a></li>
                 <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/pasteleria" className="flex items-center text-[0.6rem] md:text-sm gap-2"><RiCake3Line/>Pastelería</a></li>
@@ -52,7 +54,7 @@ const handleEdit = (value)=>{
           <div className="w-[12rem] h-[2rem] flex flex-col pt-2 ">
   
          
-              <button onClick={() => setIsOpeEdit(!isOpenEdit)} className="text-[0.7rem] md:text-sm text-[#769164] hover:text-[#4a5b3f] cursor-pointer">Editar Productos</button>
+              <button onClick={() => setIsOpeEdit(!isOpenEdit)} className="text-[0.7rem] md:text-lg text-[#769164] hover:text-[#4a5b3f] cursor-pointer">Editar Productos</button>
          
   
             <div className={` z-50   ${isOpenEdit ? 'visible' : 'hidden'}`}>{/* -translate-x-full */}
@@ -71,7 +73,7 @@ const handleEdit = (value)=>{
             </div>
           </div>
   
-          <div className="w-[5rem] h-full flex items-center justify-center "><button className="text-[0.7rem] md:text-sm text-[#769164] hover:text-[#4a5b3f] cursor-pointer">LogOut</button></div>
+          <div className="w-[5rem] h-full flex items-center justify-center "><button className="text-[0.7rem] md:text-lg text-[#769164] hover:text-[#4a5b3f] cursor-pointer mr-2">LogOut</button></div>
         </div>
   
       </nav>

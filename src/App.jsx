@@ -35,8 +35,8 @@ function App()
             <NavBar />
             <Routes>
               <Route path='/' element={<Home />} />
-              <Route path='/panelEdit' element={<PanelEditProduct />} />
-              <Route path='/editProduct/:id' element={<EditProducts />} />
+              <Route path='/panelEdit/:product' element={<PanelEditProduct />} />
+              <Route path='/editProduct/:product/:id' element={<EditProducts />} />
               <Route path='/panelCreate/:product' element={<PanelCreateProduct />} />
             </Routes>
           </div>

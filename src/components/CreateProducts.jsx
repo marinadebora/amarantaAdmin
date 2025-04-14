@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
-import { postProduct } from '../redux/thunks/products';
+import { postProduct } from '../redux/thunks/producId';
 import { GiMeal } from "react-icons/gi";
 import { RiDrinks2Fill } from "react-icons/ri";
 import { BiDrink } from "react-icons/bi";
@@ -18,7 +18,7 @@ const CreateProducts = ({ productData }) =>
 {
   console.log(productData)
   const [selectPastas, setSelectPastas] = useState(false);
-  const [selecJtugos, setSelectJugos] = useState(null);
+  const [selecJuugos, setSelectJugos] = useState(null);
   const [selectRefrescos, setSelectRefrescos] = useState(null);
   const [selectBodega, setSelectBodega] = useState(null);
   const [selectCervezas, setSelectCervezas] = useState(null);
@@ -203,12 +203,12 @@ const CreateProducts = ({ productData }) =>
                 </>
               }
               {
-                productData?.defaultValues?.price2 && selecJtugos || selectRefrescos || selectCervezas || selectPicadas ?
+                productData?.defaultValues?.price2 && selecJuugos || selectRefrescos || selectCervezas || selectPicadas ?
                   <div className='flex items-center justify-around gap-1'>
                     <div className='w-[40%]'>
                       <div className="flex items-center justify-between">
                         <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
-                          {selecJtugos && "Precio Jarra"}{selectRefrescos && "Precio 500 cc"}{selectCervezas && "Precio Botella"}{selectPicadas && "Precio Para 2"}
+                          {selecJuugos && "Precio Jarra"}{selectRefrescos && "Precio 500 cc"}{selectCervezas && "Precio Botella"}{selectPicadas && "Precio Para 2"}
                         </label>
                       </div>
                       <div className="">
@@ -223,7 +223,7 @@ const CreateProducts = ({ productData }) =>
                     <div className='w-[40%]'>
                       <div className="flex items-center justify-between">
                         <label htmlFor="price2" className="block text-sm/6 font-medium text-[#769164]">
-                          {selecJtugos && "Precio Vaso"} {selectRefrescos && "Precio 1.5 L"}{selectCervezas && "Precio Lata"}{selectPicadas && "Precio Para 4"}
+                          {selecJuugos && "Precio Vaso"} {selectRefrescos && "Precio 1.5 L"}{selectCervezas && "Precio Lata"}{selectPicadas && "Precio Para 4"}
                         </label>
                       </div>
 

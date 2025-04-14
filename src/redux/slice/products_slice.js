@@ -1,8 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  data:"",
-  status:"",
+  alPlato:"",
+  bebidas:"",
+  bebidasAlcohol:"",
+  cafeteria:"",
+  ensaladasGuarniciones:"",
+  entrePanes:"",
+  pasteleria:"",
+  pizzaTartasEmpanadas:"",
+  postres:"",
+  tapeo:"",
   errors:""
 };
 
@@ -11,15 +19,8 @@ export const products_slice = createSlice({
   initialState,
   reducers:{
     get_products:(state,action)=>{
-      state.data = action.payload
-    },
-    post_products:(state,action)=>{
-      state.data = action.payload.data,
-      state.status = action.payload.status
-    },
-    put_products:(state,action)=>{
-      state.data = action.payload.data,
-      state.status = action.payload.status
+      state[action.payload.collection] = action.payload.data
+      console.log(action.payload)
     },
     error_products:(state,action)=>{
       state.data = action.payload.data,
@@ -27,5 +28,5 @@ export const products_slice = createSlice({
     }
   }
 });
-export const { get_products, post_products, put_products, error_products }= products_slice.actions;
+export const { get_products, error_products }= products_slice.actions;
 export default products_slice.reducer
