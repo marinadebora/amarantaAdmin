@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from "react-hook-form";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { postProduct } from '../redux/thunks/producId';
 import { GiMeal } from "react-icons/gi";
 import { RiDrinks2Fill } from "react-icons/ri";
@@ -13,10 +13,12 @@ import { RiCake3Line } from "react-icons/ri";
 import { LuPizza } from "react-icons/lu";
 import { LuIceCreamBowl } from "react-icons/lu";
 import { MdFoodBank } from "react-icons/md";
+import ExitoAlert from './alerts/ExitoAlert';
+import ErrorAlert from './alerts/ErrorAlert';
 
 const CreateProducts = ({ productData }) =>
 {
-  console.log(productData)
+
   const [selectPastas, setSelectPastas] = useState(false);
   const [selecJuugos, setSelectJugos] = useState(null);
   const [selectRefrescos, setSelectRefrescos] = useState(null);
@@ -25,8 +27,11 @@ const CreateProducts = ({ productData }) =>
   const [selectHamburguesas, setSelectHamburguesas] = useState(null);
   const [selectPicadas, setSelectPicadas] = useState(null);
   const [subSelect, setSubSelect] = useState(null);
+  const [exito, setExito] = useState(false);
+  const [error, setError] = useState(false);
   const dispatch = useDispatch();
-
+  const { data, errors } = useSelector(state => state.productId);
+  
   const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: productData?.defaultValues
   });
@@ -46,7 +51,7 @@ const CreateProducts = ({ productData }) =>
   const seccion = watch("section");
   const price = watch("price");
   const price2 = watch("price2");
-//el useEffect consulta si debe o no abrir subSelect o price2 segun correspoda para cada coleccion
+  //el useEffect consulta si debe o no abrir subSelect o price2 segun correspoda para cada coleccion
   useEffect(() =>
   {
 
@@ -87,33 +92,54 @@ const CreateProducts = ({ productData }) =>
     } else {
       setSelectPicadas(null)
     }
-   //se asignan a una sola variable sera true en cualquiera de estos tres caso
+    //se asignan a una sola variable sera true en cualquiera de estos tres caso
     if (selectPastas || selectHamburguesas || selectPicadas) {
       setSubSelect(true)
     } else {
       setSubSelect(null)
     }
   }, [selectPastas, price, price2, seccion, selectHamburguesas, selectPicadas]);
- 
+
   const submitForm = (values) =>
   {
     //despacha la accion postProduct que carga la db envia el nombre de la coleccion y sus datos
-     dispatch(postProduct({ collection:productData.collection, values }))
+    dispatch(postProduct({ collection: productData.collection, values }))
     reset()
   };
 
+  useEffect(() =>
+  {
+    if (data === "Producto creado exitosamente") {
+      setExito(true)
+      setTimeout(() =>
+      {
+        setExito(false)
+      }, 1000)
+    }
+    if (errors) {
+      setError(true)
+      setTimeout(() =>
+      {
+        setError(false)
+      }, 1000)
+    }
+  }, [data, errors]);
 
   return (
     <main className=' w-full h-full flex flex-col items-start justify-center md:p-0 '>
       <div className=' w-full h-full py-2 flex items-center justify-center'>
         <div className="bg-[#f9eae6] w-[80%]  md:w-[20rem] flex flex-col items-center gap-4 rounded-2xl py-4 px-6 lg:px-8">
           <div className="rounded-2xl h-[4rem] w-[15rem] flex items-center justify-center gap-4 text-[#769164] md:text-xl">
-           {/* asigna el titulo segun el objeto que trae desde productData y luego agrega el icono segun corresponda */}
-           <p className='text-lg font-bold'>{productData?.title}</p>{icon[productData?.collection]}
+            {/* asigna el titulo segun el objeto que trae desde productData y luego agrega el icono segun corresponda */}
+            <p className='text-lg font-bold'>{productData?.title}</p>{icon[productData?.collection]}
           </div>
           <div className=" mx-auto w-full max-w-sm ">
 
             <form onSubmit={handleSubmit(submitForm)} className="space-y-2">
+              {/* alertas solo se muestran cuando es necesario */}
+              {exito && <ExitoAlert text="Producto creado exitosamente" />}
+              {error && <ErrorAlert text="No pudimos crear el producto" />}
+              {/* cada coleccion tiene difernetes secciones de esta forma toma la data de producData y crea las seccion segun corresponda */}
               {
                 productData?.section &&
 
@@ -138,6 +164,7 @@ const CreateProducts = ({ productData }) =>
 
               }
               {
+                /* algunas colecciones tienen sub secciones por eso se nuestran dependiendo de cada una*/
                 subSelect &&
                 <div>
                   <div className="flex items-center justify-between">
@@ -183,6 +210,7 @@ const CreateProducts = ({ productData }) =>
                 </div>
               </div>
               {
+                /* la coleccion de vino tiene como campo bodega se muestra solo en el caso de los vinos */
                 selectBodega &&
                 <>
                   <div className="flex items-center justify-between">
@@ -203,6 +231,7 @@ const CreateProducts = ({ productData }) =>
                 </>
               }
               {
+                /* algunas colecciones tienen un segundo precio dependiendo del tamaño del producto aca se selecciona segun corresponda  acada coleccion */
                 productData?.defaultValues?.price2 && selecJuugos || selectRefrescos || selectCervezas || selectPicadas ?
                   <div className='flex items-center justify-around gap-1'>
                     <div className='w-[40%]'>
@@ -237,6 +266,7 @@ const CreateProducts = ({ productData }) =>
                     </div>
                   </div>
                   :
+                  /* si la coleccion tiene solo un precio se muestra este caso */
                   <div>
                     <label htmlFor="price" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
                       Precio

@@ -64,11 +64,20 @@ const PanelEditProduct = () =>
               </tbody>
             </table>
             :
-            <div className="bg-[#f2d0c7] w-[20rem] h-[18rem] rounded-2xl flex items-center justify-center border border-[#f2d0c7] ">
+            <div className='w-full h-full flex items-center justify-center '>
+            <div className='w-[30rem] h-[35rem] shadow-2xl'>
+              <div className='h-[50%] flex flex-col items-center justify-center gap-5'>
+                <h1 className='text-white text-[2rem]'>AMARANTA</h1>
+                <p className='text-white '>café resto</p>
+                <img src={gif} alt="gif de espera" />
+              </div>
+            </div>
+          </div>
+           /*  <div className="bg-[#f2d0c7] w-[20rem] h-[18rem] rounded-2xl flex items-center justify-center border border-[#f2d0c7] ">
               <div className=' bg-[#f9eae6] rounded-2xl flex items-center justify-center w-[80%] h-[80%] '>
               <img src={gif} alt="" />
             </div>
-            </div>
+            </div> */
         }
 
       </div>

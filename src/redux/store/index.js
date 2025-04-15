@@ -7,6 +7,6 @@ export const store = configureStore({
   reducer: {
     logIn: logInReducer,
     products: productReducers,
-    productId:PproductIdReducers
+    productId: PproductIdReducers
   }
 })

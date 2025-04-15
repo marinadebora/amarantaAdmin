@@ -16,7 +16,7 @@ export const getProducts = (payload) =>
         {
           return res.docs.map(e => ({ ...e.data(), id: e.id }))
         })
-      dispatch(get_products({data:data,collection:payload}))
+      dispatch(get_products({ data: data, collection: payload }))
     } catch (error) {
       dispatch(error_products(error))
     }

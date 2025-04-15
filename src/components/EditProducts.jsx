@@ -1,65 +1,93 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { useForm } from "react-hook-form";
 import { useDispatch } from 'react-redux';
 import { clean_product_id } from '../redux/slice/productId_slice';
-import { putProduct } from '../redux/thunks/producId';
+import { deleteProduct, putProduct } from '../redux/thunks/producId';
+import ExitoAlert from './alerts/ExitoAlert';
+import ErrorAlert from './alerts/ErrorAlert';
+import RiskAlert from './alerts/RiskAlert';
 
 const EditProducts = () =>
 {
-  const { data } = useSelector(state => state.productId);
- const [exito, setExito] = useState(false);
+  const [exito, setExito] = useState(false);
+  const [error, setError] = useState(false);
+  const [buttonDeletProduct, setButtonDeletProduct] = useState(false);
   const dispatch = useDispatch()
-  const navigate= useNavigate()
-  const { product,id } = useParams()
-  const { register, handleSubmit, reset } = useForm({
-    defaultValues: {
-      ...data
-    }
-  })
- 
+  const navigate = useNavigate()
+  //recibe por params el nombre de la colleccion y el id del producto
+  const { product, id } = useParams()
+  const { data, errors } = useSelector((state) => state.productId);
+  const msjEdit = "Producto editado exitosamente";
+  const msjDelete = "Producto borrado exitosamente"
 
-  const submitForm = (values) =>
+  const [formData, setFormData] = useState({
+    name: '',
+    price: '',
+    price2: '',
+    description: '',
+  });
+
+  const handleChange = (e) =>
   {
-    let dataValue = {}
-    if (data.price2) {
-      dataValue = {
-        name: values.name ? values.name : data.name,
-        description: values.description ? values.description : data.description,
-        price: values.price ? values.price : data.price,
-        price2: values.price2 ? values.price2 : data.price2
-      }
-    } else {
-      dataValue = {
-        name: values.name ? values.name : data.name,
-        description: values.description ? values.description : data.description,
-        price: values.price ? values.price : data.price,
-      }
-    }
-    dispatch(putProduct({collection:product,id:id,values:dataValue}))
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+  const submitForm = (event) =>
+  {
+    event.preventDefault();
+    dispatch(putProduct({ collection: product, id: id, values: formData }))
     dispatch(clean_product_id())
-    reset()
-    console.log(dataValue)
   }
-  useEffect(() => {
-   if(data === "cargado con exito"){
-     setExito(true)
-     setTimeout(()=>{
-      navigate('/')
-     },1000)
-   }
-  }, [data, navigate]);
+
+  useEffect(() =>
+  {
+    if (data) {
+      setFormData({
+        name: data.name || '',
+        price: data.price || '',
+        price2: data.price2 || '',
+        description: data.description || '',
+      });
+    }
+  }, [data]);
+
+  useEffect(() =>
+  {
+    if (errors) {
+      setError(true)
+      setTimeout(() =>
+      {
+        navigate('/')
+      }, 1000)
+    } else {
+      setError(false)
+    }
+    if (data === msjEdit || data === msjDelete) {
+      setExito(data)
+      setTimeout(() =>
+      {
+        navigate('/')
+      }, 1000)
+    }
+  }, [data, errors, navigate]);
+  const handleDeleteProduct = () =>
+  {
+    dispatch(deleteProduct({ collection: product, id }))
+    setButtonDeletProduct(false)
+  }
+
   return (
     <div className=" mx-auto w-full max-w-sm shadow-2xl p-4 rounded-2xl">
-      {
-exito&&
-<div class="flex items-center bg-blue-400 text-white text-sm font-bold px-4 py-3" role="alert">
-  <svg class="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.432 0c1.34 0 2.01.912 2.01 1.957 0 1.305-1.164 2.512-2.679 2.512-1.269 0-2.009-.75-1.974-1.99C9.789 1.436 10.67 0 12.432 0zM8.309 20c-1.058 0-1.833-.652-1.093-3.524l1.214-5.092c.211-.814.246-1.141 0-1.141-.317 0-1.689.562-2.502 1.117l-.528-.88c2.572-2.186 5.531-3.467 6.801-3.467 1.057 0 1.233 1.273.705 3.23l-1.391 5.352c-.246.945-.141 1.271.106 1.271.317 0 1.357-.392 2.379-1.207l.6.814C12.098 19.02 9.365 20 8.309 20z"/></svg>
-  <p>Editado correctamente</p>
-</div>
-      }
-      <form onSubmit={handleSubmit(submitForm)} className="space-y-2">
+      {/* alertas solo se muestran cuando es necesario */}
+      {exito && <ExitoAlert text={exito} />}
+      {error && <ErrorAlert text="No se pudo actualizar." />}
+
+      <form onSubmit={submitForm} className="space-y-2">
+        {/* el formulario se carga con los datos del producto a editar si no se modifican esos datos guarda los que ya existian */}
         <div >
           <label htmlFor="name" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
             Nombre
@@ -67,8 +95,9 @@ exito&&
           <div className="mt-2">
             <input
               className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              {...register("name")}
-              placeholder={data.name}
+              name='name'
+              value={formData.name}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -78,9 +107,10 @@ exito&&
           </label>
           <div className="mt-2">
             <input
-              placeholder={data.description}
               className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              {...register("description")}
+              name='description'
+              value={formData?.description}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -91,8 +121,9 @@ exito&&
           <div className="mt-2">
             <input
               className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              {...register("price")}
-              placeholder={data.price}
+              name='price'
+              value={formData?.price}
+              onChange={handleChange}
             />
           </div>
         </div>
@@ -105,8 +136,9 @@ exito&&
             <div className="mt-2">
               <input
                 className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                {...register("price2")}
-                placeholder={data.price2}
+                name='price2'
+                value={formData?.price2}
+                onChange={() => handleChange()}
                 required
               />
             </div>
@@ -119,6 +151,11 @@ exito&&
           Editar
         </button>
       </form>
+      {/* si existen los datos y el id se muestra el boton para borra el producto de la db */}
+      {product && id && <button className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 shadow-2xl" onClick={() => setButtonDeletProduct(true)}>Borrar Producto</button>}
+      {/* el boton de borrar solo envia esta alerta para prevenir borrados por accidente handleDeleteProduct es quien realmente borra el podructo */}
+      {buttonDeletProduct && <RiskAlert funYes={handleDeleteProduct} funNo={setButtonDeletProduct} />}
+
     </div>
   );
 };
