@@ -1,15 +1,19 @@
-import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { LogIn } from '../redux/thunks/logIn';
-
+import { useNavigate } from 'react-router-dom';
+import ErrorAlert from './alerts/ErrorAlert';
 
 const Login = () =>
 {
+  const logIn = useSelector(state => state.logIn);
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const [error, setError] = useState(false);
   const [logInData, setLogInData] = useState({
     email: "",
     password: ""
   });
-  const dispatch = useDispatch()
 
   const handleLogIn = (event) =>
   {
@@ -29,8 +33,19 @@ const Login = () =>
     })
 
   }
-
+  useEffect(() =>
+  {
+    if (logIn.data) {
+      navigate('/home')
+    }
+    if (logIn.errors) {
+      setError(true)
+    } else {
+      setError(false)
+    }
+  }, [logIn, navigate]);
   return (
+
     <div className='w-full h-[95vh] flex items-center justify-center'>
       <div className="bg-[#f9eae6] w-[20rem] rounded-2xl h-[30rem] flex  flex-col justify-center px-6 py-12 lg:px-8">
         <div className=" rounded-2xl h-[6rem]  flex flex-col items-center justify-center text-[#f9eae6]">
@@ -39,6 +54,10 @@ const Login = () =>
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
 
           <form onSubmit={handleSubmit} method="POST" className="space-y-6">
+            {
+              error &&
+              <ErrorAlert text="correo o contraseña incorrecta" />
+            }
             <div>
               <label htmlFor="email" className="block text-sm/6 font-medium text-[#769164]">
                 Email
@@ -91,6 +110,7 @@ const Login = () =>
         </div>
       </div>
     </div>
+
   );
 };
 

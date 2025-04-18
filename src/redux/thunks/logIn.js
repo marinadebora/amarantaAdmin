@@ -14,7 +14,6 @@ export const LogIn = ({ email, password }) =>
       .then((userCredential) =>
       {
         response = userCredential.user
-        console.log(response)
         dispatch(logIn_user(response.accessToken
         ))
       })

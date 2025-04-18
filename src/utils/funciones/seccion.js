@@ -5,7 +5,7 @@ export default (value) =>
   return value === "infusions" ? "Infusiones" :
     value === "specialty" ? "Especialidad" :
       value === "classics" ? "Clásicos" :
-        value === "cold" ? "Fíos" :
+        value === "cold" ? "Fríos" :
           value === "cakes" ? "Tortas" :
             value === "puddings" ? "Budines" :
               value === "healthy bowls" ? "Bowls Naturales" :

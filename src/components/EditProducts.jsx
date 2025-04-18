@@ -7,7 +7,8 @@ import { deleteProduct, putProduct } from '../redux/thunks/producId';
 import ExitoAlert from './alerts/ExitoAlert';
 import ErrorAlert from './alerts/ErrorAlert';
 import RiskAlert from './alerts/RiskAlert';
-
+import values from '../utils/index'
+import Loading from './Loading';
 const EditProducts = () =>
 {
   const [exito, setExito] = useState(false);
@@ -22,10 +23,7 @@ const EditProducts = () =>
   const msjDelete = "Producto borrado exitosamente"
 
   const [formData, setFormData] = useState({
-    name: '',
-    price: '',
-    price2: '',
-    description: '',
+    ...values[product].defaultValues
   });
 
   const handleChange = (e) =>
@@ -47,10 +45,7 @@ const EditProducts = () =>
   {
     if (data) {
       setFormData({
-        name: data.name || '',
-        price: data.price || '',
-        price2: data.price2 || '',
-        description: data.description || '',
+        ...data
       });
     }
   }, [data]);
@@ -61,7 +56,7 @@ const EditProducts = () =>
       setError(true)
       setTimeout(() =>
       {
-        navigate('/')
+        navigate('/home')
       }, 1000)
     } else {
       setError(false)
@@ -70,7 +65,7 @@ const EditProducts = () =>
       setExito(data)
       setTimeout(() =>
       {
-        navigate('/')
+        navigate('/home')
       }, 1000)
     }
   }, [data, errors, navigate]);
@@ -85,76 +80,83 @@ const EditProducts = () =>
       {/* alertas solo se muestran cuando es necesario */}
       {exito && <ExitoAlert text={exito} />}
       {error && <ErrorAlert text="No se pudo actualizar." />}
+      {
+        data ?
+          <>
+            <form onSubmit={submitForm} className="space-y-2">
+              {/* el formulario se carga con los datos del producto a editar si no se modifican esos datos guarda los que ya existian */}
+              <div >
+                <label htmlFor="name" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
+                  Nombre
+                </label>
+                <div className="mt-2">
+                  <input
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    name='name'
+                    value={formData.name}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="description" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
+                  Descripcion
+                </label>
+                <div className="mt-2">
+                  <input
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    name='description'
+                    value={formData?.description}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div>
+                <label htmlFor="price" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
+                  Precio
+                </label>
+                <div className="mt-2">
+                  <input
+                    className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                    name='price'
+                    value={formData?.price}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              {
+                data.price2 &&
+                <div>
+                  <label htmlFor="price2" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
+                    Precio
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      name='price2'
+                      value={formData?.price2}
+                      onChange={() => handleChange()}
+                      required
+                    />
+                  </div>
+                </div>
+              }
+              <button
+                type="submit"
+                className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-[#4b5d3f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >
+                Editar
+              </button>
+            </form>
+            {/* si existen los datos y el id se muestra el boton para borra el producto de la db */}
+            {product && id && <button className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 shadow-2xl" onClick={() => setButtonDeletProduct(true)}>Borrar Producto</button>}
+            {/* el boton de borrar solo envia esta alerta para prevenir borrados por accidente handleDeleteProduct es quien realmente borra el podructo */}
+            {buttonDeletProduct && <RiskAlert funYes={handleDeleteProduct} funNo={setButtonDeletProduct} />}
 
-      <form onSubmit={submitForm} className="space-y-2">
-        {/* el formulario se carga con los datos del producto a editar si no se modifican esos datos guarda los que ya existian */}
-        <div >
-          <label htmlFor="name" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
-            Nombre
-          </label>
-          <div className="mt-2">
-            <input
-              className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              name='name'
-              value={formData.name}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="description" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
-            Descripcion
-          </label>
-          <div className="mt-2">
-            <input
-              className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              name='description'
-              value={formData?.description}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div>
-          <label htmlFor="price" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
-            Precio
-          </label>
-          <div className="mt-2">
-            <input
-              className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-              name='price'
-              value={formData?.price}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        {
-          data.price2 &&
-          <div>
-            <label htmlFor="price2" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
-              Precio
-            </label>
-            <div className="mt-2">
-              <input
-                className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                name='price2'
-                value={formData?.price2}
-                onChange={() => handleChange()}
-                required
-              />
-            </div>
-          </div>
-        }
-        <button
-          type="submit"
-          className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-[#4b5d3f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-        >
-          Editar
-        </button>
-      </form>
-      {/* si existen los datos y el id se muestra el boton para borra el producto de la db */}
-      {product && id && <button className="flex w-full justify-center rounded-md bg-[#769164] px-3 py-1.5 text-sm/6 font-semibold text-[#f9eae6] shadow-xs hover:bg-red-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 shadow-2xl" onClick={() => setButtonDeletProduct(true)}>Borrar Producto</button>}
-      {/* el boton de borrar solo envia esta alerta para prevenir borrados por accidente handleDeleteProduct es quien realmente borra el podructo */}
-      {buttonDeletProduct && <RiskAlert funYes={handleDeleteProduct} funNo={setButtonDeletProduct} />}
+          </>
+          :
+          <Loading />
+      }
 
     </div>
   );

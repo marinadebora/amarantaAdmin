@@ -9,6 +9,7 @@ import { FiCoffee } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { getProducts } from "../redux/thunks/products";
 import { clean_product_id } from "../redux/slice/productId_slice";
+import { clean_logIn } from "../redux/slice/logIn_slice";
 
 function NavBar()
 {
@@ -29,6 +30,7 @@ function NavBar()
   const handleLogOut = () =>
   {
     sessionStorage.removeItem('token')
+    dispatch(clean_logIn())
     navigate('/')
   }
   return (
