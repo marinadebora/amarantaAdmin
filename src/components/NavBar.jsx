@@ -18,7 +18,12 @@ function NavBar()
   const dispatch = useDispatch();
   const navigate = useNavigate()
 
-
+  const handleCreate = (value) =>
+    {
+      navigate(`/panelCreate/${value}`)
+      setIsOpenCreate(!isOpenCreate)
+    }
+  
   const handleEdit = (value) =>
   {
     dispatch(clean_product_id())
@@ -45,16 +50,16 @@ function NavBar()
 
           <div className={`z-50  ${isOpenCreate ? 'visible' : 'hidden'}`}>
             <ul className="bg-[#f9eae6] mt-6 md:mt-8 w-full h-full shadow-xl flex flex-col gap-2 rounded-sm p-2">
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/cafeteria" className="flex items-center text-[0.6rem] md:text-sm gap-2"><FiCoffee />Cafeteria</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/pasteleria" className="flex items-center text-[0.6rem] md:text-sm gap-2"><RiCake3Line />Pastelería</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/tapeo" className="flex items-center text-[0.6rem] md:text-sm gap-2"><MdFoodBank />Tapeo</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/pizzaTartasEmpanadas" className="flex items-center text-[0.6rem] md:text-[0.8rem] gap-2"><LuPizza />Pizzas Tartas y Empanadas</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/entrePanes" className="flex items-center text-[0.6rem] md:text-sm gap-2"><LuSandwich />Entre Panes</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/ensaladasGuarniciones" className="flex items-center text-[0.6rem] md:text-[0.8rem] gap-2"><LuSalad />Ensaladas y Guarniciones</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/alPlato" className="flex items-center text-[0.6rem] md:text-sm gap-2"><GiMeal />Al Plato</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/postres" className="flex items-center text-[0.6rem] md:text-sm gap-2"><LuIceCreamBowl />Postres</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/bebidas" className="flex items-center text-[0.6rem] md:text-sm gap-2"><RiDrinks2Fill />Bebidas</a></li>
-              <li className="cursor-pointer hover:bg-[#f2d0c7]"><a href="/panelCreate/bebidasAlcohol" className="flex items-center text-[0.6rem] md:text-sm gap-2"><BiDrink />Con Alcohol</a></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('cafeteria')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><FiCoffee /> Cafeteria</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('pasteleria')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><RiCake3Line /><p className="text-xs md:text-sm">Pastelería</p></button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('tapeo')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><MdFoodBank /> Tapeo</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('pizzaTartasEmpanadas')} className="flex items-center text-[0.6rem] md:text-[0.8rem] gap-2"><LuPizza /> Pizzas Tartas y Empanadas</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('entrePanes')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><LuSandwich /> Entre Panes</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('ensaladasGuarniciones')} className="flex items-center text-[0.6rem] md:text-[0.8rem] gap-2"><LuSalad /> Ensaladas y Guarniciones</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('alPlato')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><GiMeal /> Al Plato</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('postres')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><LuIceCreamBowl /> Postres</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('bebidas')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><RiDrinks2Fill /> Bebidas</button></li>
+              <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleCreate('bebidasAlcohol')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><BiDrink />Con Alcohol</button></li>
             </ul>
           </div>
         </div>
@@ -63,7 +68,7 @@ function NavBar()
 
           <button onClick={() => setIsOpeEdit(!isOpenEdit)} className="text-[0.7rem] md:text-lg text-[#769164] hover:text-[#4a5b3f] cursor-pointer">Editar Productos</button>
 
-          <div className={` z-50   ${isOpenEdit ? 'visible' : 'hidden'}`}>{/* -translate-x-full */}
+          <div className={` z-50   ${isOpenEdit ? 'visible' : 'hidden'}`}>
             <ul className="bg-[#f9eae6] mt-6 md:mt-8 h-full shadow-xl flex flex-col gap-2 rounded-sm p-2">
               <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleEdit('cafeteria')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><FiCoffee /> Cafeteria</button></li>
               <li className="cursor-pointer hover:bg-[#f2d0c7]"><button onClick={() => handleEdit('pasteleria')} className="flex items-center text-[0.6rem] md:text-sm gap-2"><RiCake3Line /><p className="text-xs md:text-sm">Pastelería</p></button></li>
