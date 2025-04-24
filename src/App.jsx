@@ -22,7 +22,7 @@ function App()
     if (data || token) {
       setLogInState(true)
     } else {
-      setLogInState(null)
+      setLogInState(false)
     }
   }, [data, token]);
 
