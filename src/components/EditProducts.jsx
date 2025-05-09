@@ -44,6 +44,7 @@ const EditProducts = () =>
   useEffect(() =>
   {
     if (data) {
+      console.log(data)
       setFormData({
         ...data
       });
@@ -86,7 +87,7 @@ const EditProducts = () =>
             <form onSubmit={submitForm} className="space-y-2">
               {/* el formulario se carga con los datos del producto a editar si no se modifican esos datos guarda los que ya existian */}
               <div >
-                <label htmlFor="name" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
+                <label htmlFor="name" className="block text-xs md:text-sm/6 font-medium text-[#f2d0c7]">
                   Nombre
                 </label>
                 <div className="mt-2">
@@ -99,7 +100,7 @@ const EditProducts = () =>
                 </div>
               </div>
               <div>
-                <label htmlFor="description" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
+                <label htmlFor="description" className="block text-xs md:text-sm/6 font-medium text-[#f2d0c7]">
                   Descripcion
                 </label>
                 <div className="mt-2">
@@ -112,8 +113,8 @@ const EditProducts = () =>
                 </div>
               </div>
               <div>
-                <label htmlFor="price" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
-                  Precio
+                <label htmlFor="price" className="block text-xs md:text-sm/6 font-medium text-[#f2d0c7]">
+                  Precio {product==="tapeo"&& data.price2 &&"Para 2"} {product==="bebidas"&&data.price2 &&"Jugos (Jarra) / gaseosas (500cc)"} {product==="bebidasAlcohol"&&data.price2 &&"Botella"}
                 </label>
                 <div className="mt-2">
                   <input
@@ -127,15 +128,15 @@ const EditProducts = () =>
               {
                 data.price2 &&
                 <div>
-                  <label htmlFor="price2" className="block text-xs md:text-sm/6 font-medium text-[#769164]">
-                    Precio
+                  <label htmlFor="price2" className="block text-xs md:text-sm/6 font-medium text-[#f2d0c7]">
+                  Precio {product==="tapeo"&& "Para 4"} {product==="bebidas"&&"Jugos (Vaso) / gaseosa (1.5 L)"} {product==="bebidasAlcohol" &&"Lata"}
                   </label>
                   <div className="mt-2">
                     <input
                       className="block w-full rounded-md bg-white px-3 py-1.5 text-xs md:text-base text-[#4b5d3f] outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
                       name='price2'
                       value={formData?.price2}
-                      onChange={() => handleChange()}
+                      onChange={handleChange}
                       required
                     />
                   </div>

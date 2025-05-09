@@ -58,7 +58,7 @@ export default {
     collection: "pasteleria",
     defaultValues: { name: '', price: '', description: '', section: "" },
     title: "PASTELERIA",
-    section: [{ value: "cakes", name: "Tortas" }, { value: "puddings", name: "Budines" }, { value: "healthy bowls", name: "Bowls Naturales" }, { value: "toasted", name: "Tostados" }],
+    section: [{ value: "cakes", name: "Tortas" }, { value: "puddings", name: "Budines" }, { value: "cookies", name: "cookies" }, { value: "healthy bowls", name: "Bowls Naturales" }, { value: "toasted", name: "Tostados" }, { value: "alfajores", name: "alfajores" }],
     input,
     header: [{ Header: "Nombre", accessor: "name" }, { Header: "Descripcion", accessor: "description" }, { Header: "Precio", accessor: "price" }, { Header: "Seccion", accessor: "section" }]
   },

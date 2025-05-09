@@ -15,15 +15,15 @@ export const productId_slice = createSlice({
     },
     post_product: (state, action) =>
     {
-      state.data = action.payload.data
+      state.data = action.payload
     },
     put_product_id: (state, action) =>
     {
-      state.data = action.payload.data
+      state.data = action.payload
     },
     delete_product: (state, action) =>
     {
-      state.data = action.payload.data
+      state.data = action.payload
     },
     clean_product_id: (state) =>
     {
