@@ -20,7 +20,7 @@ const CreateProducts = ({ productData }) =>
 {
 
   const [selectPastas, setSelectPastas] = useState(false);
-  const [selecJuugos, setSelectJugos] = useState(null);
+  const [selecJugos, setSelectJugos] = useState(null);
   const [selectRefrescos, setSelectRefrescos] = useState(null);
   const [selectBodega, setSelectBodega] = useState(null);
   const [selectCervezas, setSelectCervezas] = useState(null);
@@ -232,12 +232,12 @@ const CreateProducts = ({ productData }) =>
               }
               {
                 /* algunas colecciones tienen un segundo precio dependiendo del tamaño del producto aca se selecciona segun corresponda  acada coleccion */
-                productData?.defaultValues?.price2 && selecJuugos || selectRefrescos || selectCervezas || selectPicadas ?
+                 selecJugos || selectRefrescos || selectCervezas || selectPicadas ?
                   <div className='flex items-center justify-around gap-1'>
                     <div className='w-[40%]'>
                       <div className="flex items-center justify-between">
                         <label htmlFor="price" className="block text-sm/6 font-medium text-[#769164]">
-                          {selecJuugos && "Precio Jarra"}{selectRefrescos && "Precio 500 cc"}{selectCervezas && "Precio Botella"}{selectPicadas && "Precio Para 2"}
+                          {selecJugos && "Precio Jarra"}{selectRefrescos && "Precio 500 cc"}{selectCervezas && "Precio Botella"}{selectPicadas && "Precio Para 2"}
                         </label>
                       </div>
                       <div className="">
@@ -252,7 +252,7 @@ const CreateProducts = ({ productData }) =>
                     <div className='w-[40%]'>
                       <div className="flex items-center justify-between">
                         <label htmlFor="price2" className="block text-sm/6 font-medium text-[#769164]">
-                          {selecJuugos && "Precio Vaso"} {selectRefrescos && "Precio 1.5 L"}{selectCervezas && "Precio Lata"}{selectPicadas && "Precio Para 4"}
+                          {selecJugos && "Precio Vaso"} {selectRefrescos && "Precio 1.5 L"}{selectCervezas && "Precio Lata"}{selectPicadas && "Precio Para 4"}
                         </label>
                       </div>
 
