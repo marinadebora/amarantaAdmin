@@ -8,7 +8,7 @@ export default {
     defaultValues: { name: '', price: '', description: '', section: "", subSection: "" },
     title: "AL PLATO",
     section: [{ value: "pastas", name: "Pastas" }, { value: "carnes y pollos", name: "Carnes y Pollos" }],
-    subSection: [{ value: "sorrentinos", name: "Sorrentinos" }, { value: "salsas", name: "Salsas" }, { value: " ", name: "Ninguna" }],
+    subSection: [{ value: "pastas", name: "Pastas" },{ value: "sorrentinos", name: "Sorrentinos" }, { value: "salsas", name: "Salsas" }, { value: "arroz", name: "Arroz" }],
     input,
     header: [{ Header: "Nombre", accessor: "name" }, { Header: "Descripcion", accessor: "description" }, { Header: "Precio", accessor: "price" }, { Header: "Seccion", accessor: "section" }, { Header: "Sub Seccion", accessor: "subSection" }]
   },
