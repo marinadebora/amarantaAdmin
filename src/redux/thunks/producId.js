@@ -26,7 +26,7 @@ export const postProduct = (payload) =>
   {
     try {
       await addDoc(collection(db, payload.collection), payload.values);
-      dispatch(post_product({ data: "Producto creado exitosamente" }))
+      dispatch(post_product({ msj: "Producto creado exitosamente" }))
     } catch (error) {
       dispatch(error_product_id(error))
     }
@@ -42,7 +42,7 @@ export const putProduct = (payload) =>
       const myCollection = collection(db, payload.collection)
       const myDocRef = doc(myCollection, payload.id);
       await setDoc(myDocRef, payload.values);
-      dispatch(put_product_id({ data: "Producto editado exitosamente" }))
+      dispatch(put_product_id({ msj :"Producto editado exitosamente" }))
     } catch (error) {
       dispatch(error_product_id(error))
     }
@@ -55,7 +55,7 @@ export const deleteProduct = (payload) =>
   {
     try {
       await deleteDoc(doc(db, payload.collection, payload.id))
-      dispatch(delete_product({ data: "Producto borrado exitosamente" }))
+      dispatch(delete_product({ msj: "Producto borrado exitosamente" }))
     } catch (error) {
       dispatch(error_product_id(error))
     }

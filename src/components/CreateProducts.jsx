@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +30,7 @@ const CreateProducts = ({ productData }) =>
   const [exito, setExito] = useState(false);
   const [error, setError] = useState(false);
   const dispatch = useDispatch();
-  const { data, errors } = useSelector(state => state.productId);
+  const { data,msj, errors } = useSelector(state => state.productId);
   
   const { register, handleSubmit, reset, watch } = useForm({
     defaultValues: productData?.defaultValues
@@ -109,7 +109,7 @@ const CreateProducts = ({ productData }) =>
 
   useEffect(() =>
   {
-    if (data === "Producto creado exitosamente") {
+    if (msj === "Producto creado exitosamente") {
       setExito(true)
       setTimeout(() =>
       {
@@ -123,7 +123,7 @@ const CreateProducts = ({ productData }) =>
         setError(false)
       }, 1000)
     }
-  }, [data, errors]);
+  }, [data,msj, errors]);
 
   return (
     <main className=' w-full h-full flex flex-col items-start justify-center md:p-0 '>

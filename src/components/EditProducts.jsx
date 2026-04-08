@@ -9,6 +9,7 @@ import ErrorAlert from './alerts/ErrorAlert';
 import RiskAlert from './alerts/RiskAlert';
 import values from '../utils/index'
 import Loading from './Loading';
+import { getProducts } from '../redux/thunks/products';
 const EditProducts = () =>
 {
   const [exito, setExito] = useState(false);
@@ -18,17 +19,18 @@ const EditProducts = () =>
   const navigate = useNavigate()
   //recibe por params el nombre de la colleccion y el id del producto
   const { product, id } = useParams()
-  const { data, errors } = useSelector((state) => state.productId);
+  const { data, msj, errors } = useSelector((state) => state.productId);
   const msjEdit = "Producto editado exitosamente";
   const msjDelete = "Producto borrado exitosamente"
 
   const [formData, setFormData] = useState({
     ...values[product].defaultValues
   });
-
+  //console.log(formData)
   const handleChange = (e) =>
   {
     const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
       [name]: value,
@@ -44,7 +46,6 @@ const EditProducts = () =>
   useEffect(() =>
   {
     if (data) {
-      console.log(data)
       setFormData({
         ...data
       });
@@ -57,19 +58,23 @@ const EditProducts = () =>
       setError(true)
       setTimeout(() =>
       {
+        dispatch(clean_product_id())
         navigate('/home')
       }, 1000)
     } else {
       setError(false)
     }
-    if (data === msjEdit || data === msjDelete) {
-      setExito(data)
+    if (msj === msjEdit || msj === msjDelete) {
+      setExito(msj)
+      dispatch(clean_product_id())
       setTimeout(() =>
       {
-        navigate('/home')
+        dispatch(getProducts(product))
+        navigate(-1)
       }, 1000)
+
     }
-  }, [data, errors, navigate]);
+  }, [msj, errors, navigate, dispatch, product]);
   const handleDeleteProduct = () =>
   {
     dispatch(deleteProduct({ collection: product, id }))
@@ -96,6 +101,7 @@ const EditProducts = () =>
                     name='name'
                     value={formData.name}
                     onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
@@ -114,7 +120,7 @@ const EditProducts = () =>
               </div>
               <div>
                 <label htmlFor="price" className="block text-xs md:text-sm/6 font-medium text-[#f2d0c7]">
-                  Precio {product==="tapeo"&& data.price2 &&"Para 2"} {product==="bebidas"&&data.price2 &&"Jugos (Jarra) / gaseosas (500cc)"} {product==="bebidasAlcohol"&&data.price2 &&"Botella"}
+                  Precio {product === "tapeo" && data.price2 && "Para 2"} {product === "bebidas" && data.price2 && "Jugos (Jarra) / gaseosas (500cc)"} {product === "bebidasAlcohol" && data.price2 && "Botella"}
                 </label>
                 <div className="mt-2">
                   <input
@@ -122,6 +128,7 @@ const EditProducts = () =>
                     name='price'
                     value={formData?.price}
                     onChange={handleChange}
+                    required
                   />
                 </div>
               </div>
@@ -129,7 +136,7 @@ const EditProducts = () =>
                 data.price2 &&
                 <div>
                   <label htmlFor="price2" className="block text-xs md:text-sm/6 font-medium text-[#f2d0c7]">
-                  Precio {product==="tapeo"&& "Para 4"} {product==="bebidas"&&"Jugos (Vaso) / gaseosa (1.5 L)"} {product==="bebidasAlcohol" &&"Lata"}
+                    Precio {product === "tapeo" && "Para 4"} {product === "bebidas" && "Jugos (Vaso) / gaseosa (1.5 L)"} {product === "bebidasAlcohol" && "Lata"}
                   </label>
                   <div className="mt-2">
                     <input
